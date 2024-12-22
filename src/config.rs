@@ -3,6 +3,7 @@ use crate::icons::Icon;
 use crate::modules::{styled::StyledModule, Module};
 use crate::utils::conditional_insert::conditional_insert;
 use crate::utils::system::battery::BatteryInformation;
+use std::env;
 
 pub fn get_modules() -> Vec<StyledModule> {
     let battery_information = BatteryInformation::new();
@@ -12,24 +13,30 @@ pub fn get_modules() -> Vec<StyledModule> {
     let battery_icon = Icon::new_battery(&battery_information);
 
     vec![
-        Some(StyledModule::new(
-            Module::Hostname,
-            Some(Icon::Globe),
-            Style {
-                fg: Color::Yellow,
-                bg: Color::Reset,
-                bold: false,
-            },
-        )),
-        Some(StyledModule::new(
-            Module::Uptime,
-            Some(Icon::Rocket),
-            Style {
-                fg: Color::Green,
-                bg: Color::Reset,
-                bold: false,
-            },
-        )),
+        conditional_insert(
+            StyledModule::new(
+                Module::Hostname,
+                Some(Icon::Globe),
+                Style {
+                    fg: Color::Yellow,
+                    bg: Color::Reset,
+                    bold: false,
+                },
+            ),
+            env::var("SSH_CONNECTION").is_ok()
+        ),
+        conditional_insert(
+            StyledModule::new(
+                Module::Uptime,
+                Some(Icon::Rocket),
+                Style {
+                    fg: Color::Green,
+                    bg: Color::Reset,
+                    bold: false,
+                },
+            ),
+            env::var("SSH_CONNECTION").is_ok()
+        ),
         Some(StyledModule::new(
             Module::Time("%H:%M:%S"),
             Some(Icon::Time),
