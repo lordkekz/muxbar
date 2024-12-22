@@ -13,10 +13,19 @@ pub fn get_modules() -> Vec<StyledModule> {
 
     vec![
         Some(StyledModule::new(
+            Module::Hostname,
+            Some(Icon::Globe),
+            Style {
+                fg: Color::Yellow,
+                bg: Color::Reset,
+                bold: false,
+            },
+        )),
+        Some(StyledModule::new(
             Module::Uptime,
             Some(Icon::Rocket),
             Style {
-                fg: Color::Magenta,
+                fg: Color::Green,
                 bg: Color::Reset,
                 bold: false,
             },
@@ -34,7 +43,7 @@ pub fn get_modules() -> Vec<StyledModule> {
             Module::Cpu(2),
             Some(Icon::Cpu),
             Style {
-                fg: Color::Yellow,
+                fg: Color::Cyan,
                 bg: Color::Reset,
                 bold: false,
             },
@@ -70,28 +79,10 @@ pub fn get_modules() -> Vec<StyledModule> {
             battery_percentage.unwrap_or(100) < 20 && !is_charging,
         ),
         Some(StyledModule::new(
-            Module::SessionName,
-            Some(Icon::Tmux),
-            Style {
-                fg: Color::White,
-                bg: Color::Reset,
-                bold: false,
-            },
-        )),
-        Some(StyledModule::new(
-            Module::Hostname,
-            Some(Icon::Globe),
-            Style {
-                fg: Color::Cyan,
-                bg: Color::Reset,
-                bold: false,
-            },
-        )),
-        Some(StyledModule::new(
-            Module::Manual("Flex"),
+            Module::Manual(""),
             Some(Icon::NixOS),
             Style {
-                fg: Color::Cyan,
+                fg: Color::Blue,
                 bg: Color::Reset,
                 bold: false,
             },
