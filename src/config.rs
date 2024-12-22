@@ -88,7 +88,7 @@ pub fn get_modules() -> Vec<StyledModule> {
             },
         )),
         Some(StyledModule::new(
-            Module::Manual(""),
+            Module::Manual("Flex"),
             Some(Icon::NixOS),
             Style {
                 fg: Color::Cyan,
