@@ -13,10 +13,19 @@ pub fn get_modules() -> Vec<StyledModule> {
 
     vec![
         Some(StyledModule::new(
+            Module::Uptime,
+            Some(Icon::Rocket),
+            Style {
+                fg: Color::Magenta,
+                bg: Color::Reset,
+                bold: false,
+            },
+        )),
+        Some(StyledModule::new(
             Module::Time("%H:%M:%S"),
             Some(Icon::Time),
             Style {
-                fg: Color::Magenta,
+                fg: Color::Blue,
                 bg: Color::Reset,
                 bold: false,
             },
@@ -25,7 +34,7 @@ pub fn get_modules() -> Vec<StyledModule> {
             Module::Cpu(2),
             Some(Icon::Cpu),
             Style {
-                fg: Color::Cyan,
+                fg: Color::Yellow,
                 bg: Color::Reset,
                 bold: false,
             },
@@ -48,15 +57,6 @@ pub fn get_modules() -> Vec<StyledModule> {
                 bold: false,
             },
         )),
-        Some(StyledModule::new(
-            Module::SessionName,
-            Some(Icon::Tmux),
-            Style {
-                fg: Color::Blue,
-                bg: Color::Reset,
-                bold: false,
-            },
-        )),
         conditional_insert(
             StyledModule::new(
                 Module::Manual("  LOW BATTERY  "),
@@ -69,6 +69,33 @@ pub fn get_modules() -> Vec<StyledModule> {
             ),
             battery_percentage.unwrap_or(100) < 20 && !is_charging,
         ),
+        Some(StyledModule::new(
+            Module::SessionName,
+            Some(Icon::Tmux),
+            Style {
+                fg: Color::White,
+                bg: Color::Reset,
+                bold: false,
+            },
+        )),
+        Some(StyledModule::new(
+            Module::Hostname,
+            Some(Icon::Globe),
+            Style {
+                fg: Color::Cyan,
+                bg: Color::Reset,
+                bold: false,
+            },
+        )),
+        Some(StyledModule::new(
+            Module::Manual(""),
+            Some(Icon::NixOS),
+            Style {
+                fg: Color::Cyan,
+                bg: Color::Reset,
+                bold: false,
+            },
+        )),
     ]
     .into_iter()
     .flatten()

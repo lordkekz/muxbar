@@ -7,9 +7,12 @@ use std::fmt;
 pub enum Icon {
     Manual(&'static str),
     Time,
+    Rocket,
+    Globe,
     Hyprland,
     I3,
     Arch,
+    NixOS,
     DetailTux,
     SimpleTux,
     Battery(u8),
@@ -17,6 +20,7 @@ pub enum Icon {
     DoubleServer,
     TripleServer,
     Cpu,
+    Memory,
     Tmux,
 }
 
@@ -39,9 +43,12 @@ impl fmt::Display for Icon {
         match self {
             Icon::Manual(s) => write!(f, "{}", s),
             Icon::Time => write!(f, ""),
+            Icon::Rocket => write!(f, "󱓞"),
+            Icon::Globe => write!(f, ""),
             Icon::Hyprland => write!(f, ""),
             Icon::I3 => write!(f, ""),
             Icon::Arch => write!(f, ""),
+            Icon::NixOS => write!(f, ""),
             Icon::DetailTux => write!(f, ""),
             Icon::SimpleTux => write!(f, "󰌽"),
             Icon::Battery(pec) => match pec {
@@ -75,6 +82,7 @@ impl fmt::Display for Icon {
             Icon::DoubleServer => write!(f, ""),
             Icon::TripleServer => write!(f, ""),
             Icon::Cpu => write!(f, ""),
+            Icon::Memory => write!(f, ""),
             Icon::Tmux => write!(f, ""),
         }
     }
